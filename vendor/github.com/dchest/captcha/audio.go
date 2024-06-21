@@ -29,7 +29,7 @@ type Audio struct {
 // must be in range 0-9. Digits are pronounced in the given language. If there
 // are no sounds for the given language, English is used.
 //
-// Possible values for lang are "en", "ru", "zh".
+// Possible values for lang are "en", "ja", "ru", "zh".
 func NewAudio(id string, digits []byte, lang string) *Audio {
 	a := new(Audio)
 
@@ -129,7 +129,7 @@ func (a *Audio) makeBackgroundSound(length int) []byte {
 		snd := reversedSound(a.digitSounds[a.rng.Intn(10)])
 		snd = changeSpeed(snd, a.rng.Float(0.8, 1.4))
 		place := a.rng.Intn(len(b) - len(snd))
-		setSoundLevel(snd, a.rng.Float(0.2, 0.5))
+		setSoundLevel(snd, a.rng.Float(0.3, 0.46))
 		mixSound(b[place:], snd)
 	}
 	return b

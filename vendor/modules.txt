@@ -1,0 +1,64 @@
+# github.com/aerth/mbox v0.0.0-20170311013842-d168b4629916
+## explicit
+github.com/aerth/mbox
+# github.com/aerth/seconf v0.0.0-20171207055133-c26dd815a842
+## explicit
+github.com/aerth/seconf
+# github.com/aymerick/douceur v0.2.0
+## explicit
+github.com/aymerick/douceur/css
+github.com/aymerick/douceur/parser
+# github.com/bgentry/speakeasy v0.1.0
+## explicit
+github.com/bgentry/speakeasy
+# github.com/dchest/captcha v1.0.0
+## explicit; go 1.18
+github.com/dchest/captcha
+# github.com/gorilla/csrf v1.7.2
+## explicit; go 1.20
+github.com/gorilla/csrf
+# github.com/gorilla/css v1.0.0
+## explicit
+github.com/gorilla/css/scanner
+# github.com/gorilla/mux v1.8.1
+## explicit; go 1.20
+github.com/gorilla/mux
+# github.com/gorilla/securecookie v1.1.2
+## explicit; go 1.20
+github.com/gorilla/securecookie
+# github.com/goware/emailx v0.2.0
+## explicit
+github.com/goware/emailx
+# github.com/mewkiz/pkg v0.0.0-20240419123545-2c8707409a71
+## explicit; go 1.12
+github.com/mewkiz/pkg/term
+# github.com/microcosm-cc/bluemonday v1.0.26
+## explicit; go 1.21
+github.com/microcosm-cc/bluemonday
+github.com/microcosm-cc/bluemonday/css
+# github.com/sendgrid/smtpapi-go v0.6.9
+## explicit
+github.com/sendgrid/smtpapi-go
+# golang.org/x/crypto v0.21.0
+## explicit; go 1.18
+golang.org/x/crypto/cast5
+golang.org/x/crypto/internal/alias
+golang.org/x/crypto/internal/poly1305
+golang.org/x/crypto/nacl/secretbox
+golang.org/x/crypto/openpgp
+golang.org/x/crypto/openpgp/armor
+golang.org/x/crypto/openpgp/elgamal
+golang.org/x/crypto/openpgp/errors
+golang.org/x/crypto/openpgp/packet
+golang.org/x/crypto/openpgp/s2k
+golang.org/x/crypto/salsa20/salsa
+# golang.org/x/net v0.23.0
+## explicit; go 1.18
+golang.org/x/net/html
+golang.org/x/net/html/atom
+# golang.org/x/sys v0.18.0
+## explicit; go 1.18
+golang.org/x/sys/cpu
+# gopkg.in/sendgrid/sendgrid-go.v2 v2.0.0
+## explicit
+gopkg.in/sendgrid/sendgrid-go.v2

@@ -12,10 +12,12 @@
   "add_section": "{\"section\":{\"set_section_key\":\"set_section_value\",\"set_section_key_2\":\"set_section_value_2\"}}",
   "set_sections": "{\"section\":{\"set_section_key\":\"set_section_value\"}}",
   "add_filter": "{\"filters\":{\"footer\":{\"settings\":{\"text/html\":\"<strong>boo</strong>\"}}}}",
-  "set_filters": "{\"filters\":{\"footer\":{\"settings\":{\"enable\":\"1\",\"text/plain\":\"You can haz footers!\"}}}}",
+  "set_filters": "{\"filters\":{\"footer\":{\"settings\":{\"enable\":1,\"text/plain\":\"You can haz footers!\"}}}}",
   "set_send_at": "{\"send_at\":1428611024}",
   "add_send_each_at": "{\"send_each_at\":[1428611024,1428611025]}",
   "set_send_each_at": "{\"send_each_at\":[1428611024,1428611025]}",
   "set_asm_group_id": "{\"asm_group_id\":1}",
+  "add_asm_group": "{\"asm_groups_to_display\":[671332]}",
+  "add_asm_groups": "{\"asm_groups_to_display\":[45,23]}",
   "set_ip_pool": "{\"ip_pool\":\"testPool\"}"
 }

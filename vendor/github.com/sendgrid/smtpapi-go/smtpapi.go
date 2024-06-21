@@ -7,26 +7,29 @@ import (
 	"unicode/utf16"
 )
 
-const Version = "0.4.0"
+// Version represents the current version of the smtpapi-go library
+const Version = "0.6.9"
 
 // SMTPAPIHeader will be used to set up X-SMTPAPI params
 type SMTPAPIHeader struct {
-	To         []string            `json:"to,omitempty"`
-	Sub        map[string][]string `json:"sub,omitempty"`
-	Section    map[string]string   `json:"section,omitempty"`
-	Category   []string            `json:"category,omitempty"`
-	UniqueArgs map[string]string   `json:"unique_args,omitempty"`
-	Filters    map[string]Filter   `json:"filters,omitempty"`
-	ASMGroupID int                 `json:"asm_group_id,omitempty"`
-	SendAt     int64               `json:"send_at,omitempty"`
-	SendEachAt []int64             `json:"send_each_at,omitempty"`
-	IpPool     string              `json:"ip_pool,omitempty"`
-	BatchID    string              `json:"batch_id,omitempty"`
+	To          []string               `json:"to,omitempty"`
+	Sub         map[string][]string    `json:"sub,omitempty"`
+	Section     map[string]string      `json:"section,omitempty"`
+	Category    []string               `json:"category,omitempty"`
+	UniqueArgs  map[string]string      `json:"unique_args,omitempty"`
+	Filters     map[string]Filter      `json:"filters,omitempty"`
+	ASMGroupID  int                    `json:"asm_group_id,omitempty"`
+	ASMGroups   []int                  `json:"asm_groups_to_display,omitempty"`
+	SendAt      int64                  `json:"send_at,omitempty"`
+	SendEachAt  []int64                `json:"send_each_at,omitempty"`
+	IpPool      string                 `json:"ip_pool,omitempty"`
+	BatchID     string                 `json:"batch_id,omitempty"`
+	DynamicData map[string]interface{} `json:"dynamic_template_data,omitempty"`
 }
 
 // Filter represents an App/Filter and its settings
 type Filter struct {
-	Settings map[string]string `json:"settings,omitempty"`
+	Settings map[string]interface{} `json:"settings,omitempty"`
 }
 
 // NewSMTPAPIHeader creates a new header struct
@@ -106,6 +109,23 @@ func (h *SMTPAPIHeader) SetASMGroupID(groupID int) {
 	h.ASMGroupID = groupID
 }
 
+// AddASMGroupToDisplay adds a new ASM group ID to be displayed
+func (h *SMTPAPIHeader) AddASMGroupToDisplay(groupID int) {
+	h.ASMGroups = append(h.ASMGroups, groupID)
+}
+
+// AddASMGroupsToDisplay adds multiple ASM group IDs to be displayed
+func (h *SMTPAPIHeader) AddASMGroupsToDisplay(groupIDs []int) {
+	for i := 0; i < len(groupIDs); i++ {
+		h.AddASMGroupToDisplay(groupIDs[i])
+	}
+}
+
+// SetASMGroupsToDisplay will set the value of the ASMGroups field
+func (h *SMTPAPIHeader) SetASMGroupsToDisplay(groups []int) {
+	h.ASMGroups = groups
+}
+
 // AddUniqueArg will set the value of a specific argument
 func (h *SMTPAPIHeader) AddUniqueArg(arg, value string) {
 	if h.UniqueArgs == nil {
@@ -120,13 +140,13 @@ func (h *SMTPAPIHeader) SetUniqueArgs(args map[string]string) {
 }
 
 // AddFilter will set the specific setting for a filter
-func (h *SMTPAPIHeader) AddFilter(filter, setting, value string) {
+func (h *SMTPAPIHeader) AddFilter(filter, setting string, value interface{}) {
 	if h.Filters == nil {
 		h.Filters = make(map[string]Filter)
 	}
 	if _, ok := h.Filters[filter]; !ok {
 		h.Filters[filter] = Filter{
-			Settings: make(map[string]string),
+			Settings: make(map[string]interface{}),
 		}
 	}
 	h.Filters[filter].Settings[setting] = value
@@ -169,13 +189,16 @@ func escapeUnicode(input string) string {
 			// surrogate pair
 			var r1, r2 = utf16.EncodeRune(r)
 			var s = fmt.Sprintf("\\u%x\\u%x", r1, r2)
-			buffer.WriteString(s)
+			// error always nil https://golang.org/pkg/bytes/#Buffer.WriteString
+			buffer.WriteString(s) // nolint: gas, gosec
 		} else if r > 127 {
 			var s = fmt.Sprintf("\\u%04x", r)
-			buffer.WriteString(s)
+			// error always nil https://golang.org/pkg/bytes/#Buffer.WriteString
+			buffer.WriteString(s) // nolint: gas, gosec
 		} else {
 			var s = fmt.Sprintf("%c", r)
-			buffer.WriteString(s)
+			// error always nil https://golang.org/pkg/bytes/#Buffer.WriteString
+			buffer.WriteString(s) // nolint: gas, gosec
 		}
 	}
 	return buffer.String()
